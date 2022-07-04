@@ -14,7 +14,14 @@ const fs = require('fs');
 // console.log('before readFile function');
 
 // writing files
-
+    //  this function is going to write whatever is in the file with whatever we input example 'hello, world'
+fs.writeFile('./docs/blog.txt', 'hello, world', () => {
+    console.log('File was successfully written')
+});
+    // if we try to write a file that doesn't exist it is going to create that file for us!!
+fs.writeFile('./docs/blog1.txt', 'hello, world', () => {
+    console.log('File was successfully written')
+});
 
 // directories
 
