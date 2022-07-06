@@ -23,8 +23,35 @@ const server = http.createServer((req, res) => {
     // set header content type, plain text or smth with html
     res.setHeader('Content-Type', 'text/html');
 
+    let path = './views/';
+    switch(req.url) {
+        case '/':
+            path += 'index.html';
+            res.statusCode = 200;
+            break;
+        case '/about':
+            path += 'about.html';
+            res.statusCode = 200;
+            break;
+            // we can use an old url name to redirect the user to new url
+        case '/about-me':
+            res.statusCode = 301;
+            res.setHeader('Location', '/about');
+            res.end();
+            break;
+        default:
+            path += '404.html';
+            res.statusCode = 404;
+            break;
+        }
+        // Status Codes 
+        // 100 Range - Informational Responses
+        // 200 Range - Success Codes 
+        // 300 Range - codes for redirects
+        // 400 Range - user on client error codes
+        // 500 Range - Server error codes
     // send an html file to the req
-    fs.readFile('./views/index.html', (err, data) => {
+    fs.readFile(path, (err, data) => {
         if (err) {
             console.log(err);
             res.end();
