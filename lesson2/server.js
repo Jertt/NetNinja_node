@@ -2,6 +2,7 @@
 
 // here we are requiring 
 const http = require('http');
+const fs = require('fs');
 
 // we can also store the server in a constant variable for example down, just in case we need to use the server for websockets or smth else
 // const server = http.createServer();
@@ -12,13 +13,27 @@ const server = http.createServer((req, res) => {
     console.log(req.url, req.method);
 
     // set header content type
+    // res.setHeader('Content-Type', 'text/html');
+
+    // res.write('<head><link rel="stylesheet" href="#"></head>');
+    // res.write('<p>hello jertti</p>');
+    // res.write('<p>hello jertti again</p>');
+    // res.end();
+
+    // set header content type, plain text or smth with html
     res.setHeader('Content-Type', 'text/html');
 
+    // send an html file to the req
+    fs.readFile('./views/index.html', (err, data) => {
+        if (err) {
+            console.log(err);
+            res.end();
+        } else {
+            // res.write(data);
+            res.end(data);
+        }
+    });
 
-    res.write('<head><link rel="stylesheet" href="#"></head>');
-    res.write('<p>hello jertti</p>');
-    res.write('<p>hello jertti again</p>');
-    res.end();
 });
 
 server.listen(3000, 'localhost', () => {
