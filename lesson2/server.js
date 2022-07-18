@@ -34,7 +34,7 @@ const server = http.createServer((req, res) => {
             res.statusCode = 200;
             break;
             // we can use an old url name to redirect the user to new url
-        case '/about-me':
+        case '/about-us':
             res.statusCode = 301;
             res.setHeader('Location', '/about');
             res.end();
